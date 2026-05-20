@@ -1,0 +1,15 @@
+{
+  "name": "ai-feedback-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MVP para transformar feedbacks nao estruturados em dados acionaveis para Produto, Operacoes e CX.",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node --check server/index.js && node --check src/main.js",
+    "dev": "node server/index.js",
+    "start": "node server/index.js"
+  }
+}

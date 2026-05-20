@@ -1,0 +1,74 @@
+[
+  {
+    "source": "Zendesk",
+    "customer": "Fintech Atlas Pay",
+    "channel": "Ticket Enterprise",
+    "text": "A conciliacao de pagamentos Pix esta divergente desde ontem. O financeiro encontrou valores duplicados em 42 transacoes e precisa fechar o caixa ate 18h."
+  },
+  {
+    "source": "Intercom",
+    "customer": "Clara Nogueira",
+    "channel": "Chat in-app",
+    "text": "Nao consigo concluir o onboarding da conta PJ. A etapa de validacao de documentos volta para o inicio sem mostrar qual campo esta incorreto."
+  },
+  {
+    "source": "Webhook Monitor",
+    "customer": "Banco Aurora",
+    "channel": "API Alert",
+    "text": "A API de criacao de cobrancas esta retornando erro 500 em horario de pico. Isso bloqueia a emissao de boletos para clientes enterprise."
+  },
+  {
+    "source": "NPS",
+    "customer": "Operacoes LogPay",
+    "channel": "Pesquisa NPS",
+    "text": "O dashboard operacional ajuda o time, mas o relatorio de liquidacao demora muito para carregar quando filtramos por filial."
+  },
+  {
+    "source": "Email",
+    "customer": "Marina Lopes",
+    "channel": "Customer Success",
+    "text": "Tivemos cobranca duplicada no cartao corporativo e ainda nao recebemos retorno. O caso e urgente porque impacta nosso fechamento financeiro."
+  },
+  {
+    "source": "App Review",
+    "customer": "Usuario app mobile",
+    "channel": "Store Review",
+    "text": "A interface ficou mais simples, mas o app fecha quando tento anexar comprovante no chamado de contestacao."
+  },
+  {
+    "source": "Sales Call",
+    "customer": "HealthOps Brasil",
+    "channel": "Chamada comercial",
+    "text": "Precisamos exportar dados por unidade operacional e centro de custo. Hoje a exportacao vem misturada e o time perde horas em planilhas."
+  },
+  {
+    "source": "Slack Connect",
+    "customer": "NovaBank APIs",
+    "channel": "Canal tecnico",
+    "text": "A documentacao da API de estorno nao deixa claro quais webhooks sao enviados em falhas parciais. Nosso time ficou inseguro para colocar em producao."
+  },
+  {
+    "source": "Gainsight",
+    "customer": "Conta Midmarket SP",
+    "channel": "QBR",
+    "text": "O produto e bom, mas falta integracao com o ERP que usamos. Sem isso, a equipe ainda faz muita conciliacao manual."
+  },
+  {
+    "source": "WhatsApp",
+    "customer": "Patricia Menezes",
+    "channel": "Suporte operacional",
+    "text": "A entrega do cartao atrasou duas vezes para o mesmo cliente. Precisamos acompanhar o status em tempo real para reduzir chamadas no suporte."
+  },
+  {
+    "source": "Hotjar",
+    "customer": "Sessao anonima",
+    "channel": "Feedback widget",
+    "text": "Na tela de pagamentos, o botao principal fica abaixo da dobra em notebooks menores. Muitos usuarios parecem abandonar antes de finalizar."
+  },
+  {
+    "source": "PagerDuty",
+    "customer": "Operacao Critica",
+    "channel": "Incidente",
+    "text": "Falha urgente na rotina de liquidacao automatica. Os pagamentos aprovados nao mudaram de status e o time de operacoes esta tratando manualmente."
+  }
+]
