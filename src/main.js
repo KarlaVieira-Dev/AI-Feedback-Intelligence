@@ -19,6 +19,8 @@ const state = {
   page: 1,
   pageSize: 6,
   darkMode: false,
+  isAuthenticated: false,
+  loginEmail: "karla@demo.ai",
   status: "",
 };
 
@@ -30,6 +32,10 @@ const priorityClass = {
 };
 
 const impactClass = {
+  "Crítico": "danger",
+  Critico: "danger",
+  "Médio": "neutral",
+  Medio: "neutral",
   Crítico: "danger",
   Alto: "warning",
   Médio: "neutral",
@@ -52,6 +58,8 @@ const icons = {
   upload: "UP",
   search: "Q",
 };
+
+const executiveAlertText = "7 feedbacks relacionados a falhas de cobrança cresceram 38% esta semana.";
 
 async function api(path, options = {}) {
   const response = await fetch(`${API_URL}${path}`, {
@@ -92,6 +100,19 @@ function setView(view) {
   state.view = view;
   state.status = "";
   state.page = 1;
+  render();
+}
+
+function loginDemo(event) {
+  event.preventDefault();
+  state.isAuthenticated = true;
+  render();
+}
+
+function logoutDemo() {
+  state.isAuthenticated = false;
+  state.view = "dashboard";
+  state.modalFeedbackId = null;
   render();
 }
 
@@ -268,6 +289,60 @@ function impactBadge(value) {
   return `<span class="impact-pill ${impactClass[value] ?? "neutral"}">${escapeHtml(value ?? "Sem dados")}</span>`;
 }
 
+function renderLogin() {
+  return `
+    <main class="login-shell ${state.darkMode ? "dark" : ""}">
+      <section class="login-panel">
+        <div class="login-brand">
+          <div class="brand-icon">${icons.brain}</div>
+          <div>
+            <strong>AI Feedback Intelligence</strong>
+            <span>Operational intelligence for fintech teams</span>
+          </div>
+        </div>
+
+        <div class="login-copy">
+          <span class="eyebrow">Demo SaaS workspace</span>
+          <h1>Entre no painel de insights operacionais</h1>
+          <p>Consolide feedbacks de clientes, suporte, APIs e operacoes em uma visao executiva acionavel.</p>
+        </div>
+
+        <form class="login-card" id="login-form">
+          <label>Email corporativo
+            <input name="email" type="email" value="${escapeHtml(state.loginEmail)}" />
+          </label>
+          <label>Senha
+            <input name="password" type="password" value="demo123" />
+          </label>
+          <button class="primary-button" type="submit">Acessar workspace demo</button>
+          <p>Ambiente demonstrativo com dados simulados para avaliação da solução.</p>
+        </form>
+      </section>
+
+      <aside class="login-preview">
+        <div class="preview-top">
+          <span>Live intelligence</span>
+          <strong>${state.dashboard?.total ?? 0} feedbacks analisados</strong>
+        </div>
+        <div class="preview-grid">
+          ${statCard(icons.alert, "Impacto alto ou critico", state.dashboard?.highPotentialImpact ?? 0, "danger")}
+          ${statCard(icons.chart, "Sentimento predominante", state.dashboard?.dominantSentiment ?? "Sem dados")}
+          ${statCard(icons.check, "Tempo medio de resposta", "3h 42min")}
+          ${statCard(icons.alert, "Impacto financeiro potencial", "R$ 28.400", "danger")}
+        </div>
+        <section class="executive-alert-card">
+          <span class="eyebrow">Alerta executivo</span>
+          <strong>${executiveAlertText}</strong>
+        </section>
+        <div class="panel">
+          <div class="panel-header"><h2>Principais temas</h2></div>
+          ${renderBars(state.dashboard?.topThemes ?? [])}
+        </div>
+      </aside>
+    </main>
+  `;
+}
+
 function feedbackRow(feedback) {
   return `
     <button class="feedback-row" type="button" data-select="${feedback.id}">
@@ -332,7 +407,7 @@ function renderDashboard() {
   const themesLabel = (dashboard.topThemes ?? []).map((theme) => theme.name).slice(0, 2).join(", ") || "Sem dados";
   const executiveSummary =
     critical.length > 0
-      ? `${critical.length} feedbacks criticos exigem acao imediata. O sentimento predominante e ${dashboard.dominantSentiment ?? "Sem dados"} e os temas mais recorrentes sao ${themesLabel}.`
+      ? `${critical.length} feedbacks críticos exigem atenção imediata. O volume de ocorrências relacionadas a velocidade, confiabilidade e faturamento apresenta tendência de crescimento e potencial impacto operacional.`
       : `Operacao sem alertas criticos no momento. O sentimento predominante e ${dashboard.dominantSentiment ?? "Sem dados"}.`;
 
   return `
@@ -351,6 +426,8 @@ function renderDashboard() {
         ${statCard(icons.alert, "Impacto alto ou critico", dashboard.highPotentialImpact ?? 0, "danger")}
         ${statCard(icons.chart, "Sentimento predominante", dashboard.dominantSentiment ?? "Sem dados")}
         ${statCard(icons.check, "Temas recorrentes", themesLabel, "success")}
+        ${statCard(icons.check, "Tempo medio de resposta", "3h 42min")}
+        ${statCard(icons.alert, "Impacto financeiro potencial", "R$ 28.400", "danger")}
       </div>
 
       <section class="alert-panel ${critical.length ? "critical" : ""}">
@@ -359,6 +436,17 @@ function renderDashboard() {
           <strong>${escapeHtml(executiveSummary)}</strong>
         </div>
         <button class="secondary-button" type="button" data-view="list">Ver base</button>
+      </section>
+
+      <section class="executive-alerts-grid">
+        <div class="executive-alert-card">
+          <span class="eyebrow">Alerta executivo</span>
+          <strong>${executiveAlertText}</strong>
+        </div>
+        <div class="executive-alert-card">
+          <span class="eyebrow">Risco operacional</span>
+          <strong>APIs e pagamentos concentram os maiores impactos potenciais da semana.</strong>
+        </div>
       </section>
 
       <section class="dashboard-grid">
@@ -664,6 +752,59 @@ function renderArchitecture() {
   `;
 }
 
+function renderAiFlow() {
+  const steps = [
+    "Feedback recebido",
+    "Classificação IA",
+    "Análise de sentimento",
+    "Priorização",
+    "Insights executivos",
+  ];
+
+  return `
+    <main class="view">
+      <div class="view-title">
+        <div>
+          <span class="eyebrow">Como funciona a IA</span>
+          <h1>Do feedback bruto ao insight executivo</h1>
+        </div>
+        <div class="hero-mark">${icons.brain}</div>
+      </div>
+
+      <section class="panel ai-flow-panel">
+        <div class="ai-flow">
+          ${steps
+            .map(
+              (step, index) => `
+                <div class="ai-flow-step">
+                  <span>${String(index + 1).padStart(2, "0")}</span>
+                  <strong>${step}</strong>
+                </div>
+                ${index < steps.length - 1 ? "<i></i>" : ""}
+              `,
+            )
+            .join("")}
+        </div>
+      </section>
+
+      <section class="dashboard-grid">
+        <div class="panel">
+          <div class="panel-header"><h2>O que a IA retorna</h2></div>
+          <div class="problem-list">
+            <div class="problem-item"><span>1</span><p>Categoria, sentimento, prioridade e impacto potencial.</p><strong>IA</strong></div>
+            <div class="problem-item"><span>2</span><p>Problema principal, resumo executivo e sugestão de ação.</p><strong>CX</strong></div>
+            <div class="problem-item"><span>3</span><p>Alertas executivos para Produto, Operações e liderança.</p><strong>Ops</strong></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-header"><h2>Preparado para OpenAI API</h2></div>
+          <p class="ai-flow-copy">A interface usa hoje uma classificação local simulada, mantendo contrato pronto para substituir o motor por uma chamada real à OpenAI API.</p>
+        </div>
+      </section>
+    </main>
+  `;
+}
+
 function emptyState() {
   return `<div class="empty-state">${icons.file}<p>Nenhum feedback encontrado.</p></div>`;
 }
@@ -676,16 +817,25 @@ function layout(content) {
           <div class="brand-icon">${icons.brain}</div>
           <div><strong>AI Feedback</strong><span>Intelligence</span></div>
         </div>
+        <div class="user-card">
+          <div class="user-avatar">KV</div>
+          <div>
+            <strong>Karla Vieira</strong>
+            <span>Product Intelligence</span>
+          </div>
+        </div>
         <nav>
           <button class="${state.view === "dashboard" ? "active" : ""}" data-view="dashboard">${icons.chart} Dashboard</button>
           <button class="${state.view === "form" ? "active" : ""}" data-view="form">${icons.input} Entrada</button>
           <button class="${state.view === "list" ? "active" : ""}" data-view="list">${icons.file} Feedbacks</button>
-          <button class="${state.view === "architecture" ? "active" : ""}" data-view="architecture">${icons.brain} Arquitetura</button>
+          <button class="${state.view === "aiFlow" ? "active" : ""}" data-view="aiFlow">Como funciona a IA</button>
+          <button class="${state.view === "architecture" ? "active" : ""}" data-view="architecture">Arquitetura da solução</button>
         </nav>
         <div class="sidebar-footer">
           <span>MVP Portfolio</span>
           <strong>Produto, Ops e CX</strong>
           <button class="theme-toggle" type="button" id="theme-toggle">${state.darkMode ? "Light mode" : "Dark mode"}</button>
+          <button class="theme-toggle logout" type="button" id="logout-button">Sair</button>
         </div>
       </aside>
       <div class="content-area">
@@ -698,6 +848,16 @@ function layout(content) {
 }
 
 function bindEvents() {
+  const loginForm = document.querySelector("#login-form");
+  if (loginForm) {
+    loginForm.addEventListener("submit", loginDemo);
+  }
+
+  const logoutButton = document.querySelector("#logout-button");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", logoutDemo);
+  }
+
   document.querySelectorAll("[data-view]").forEach((button) => {
     button.addEventListener("click", () => setView(button.dataset.view));
   });
@@ -814,11 +974,18 @@ function bindEvents() {
 }
 
 function render() {
+  if (!state.isAuthenticated) {
+    document.querySelector("#root").innerHTML = renderLogin();
+    bindEvents();
+    return;
+  }
+
   const views = {
     dashboard: renderDashboard,
     form: renderForm,
     list: renderList,
     detail: renderDetail,
+    aiFlow: renderAiFlow,
     architecture: renderArchitecture,
   };
 

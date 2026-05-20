@@ -45,6 +45,122 @@ button {
   cursor: pointer;
 }
 
+.login-shell {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.18), transparent 30%),
+    radial-gradient(circle at 90% 20%, rgba(15, 118, 110, 0.16), transparent 28%),
+    linear-gradient(135deg, #f8fafc 0%, #eef2f7 100%);
+  display: grid;
+  gap: 28px;
+  grid-template-columns: minmax(340px, 0.9fr) minmax(420px, 1.1fr);
+  min-height: 100vh;
+  padding: 42px;
+}
+
+.login-shell.dark {
+  background:
+    radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.22), transparent 30%),
+    radial-gradient(circle at 90% 20%, rgba(15, 118, 110, 0.18), transparent 28%),
+    linear-gradient(135deg, #020617 0%, #111827 100%);
+}
+
+.login-panel,
+.login-preview {
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.12);
+}
+
+.login-shell.dark .login-panel,
+.login-shell.dark .login-preview {
+  background: rgba(17, 24, 39, 0.9);
+  border-color: rgba(51, 65, 85, 0.9);
+}
+
+.login-panel {
+  align-content: center;
+  display: grid;
+  gap: 34px;
+  padding: 36px;
+}
+
+.login-brand {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+
+.login-brand strong,
+.login-brand span {
+  display: block;
+}
+
+.login-brand span,
+.login-copy p,
+.login-card p {
+  color: var(--muted);
+}
+
+.login-copy h1 {
+  color: var(--text);
+  font-size: 42px;
+  line-height: 1.05;
+  margin: 8px 0 12px;
+}
+
+.login-copy p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.login-card p {
+  font-size: 12px;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.login-preview {
+  align-content: center;
+  display: grid;
+  gap: 16px;
+  padding: 28px;
+}
+
+.preview-top {
+  align-items: end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.preview-top span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.preview-top strong {
+  color: var(--text);
+  font-size: 18px;
+}
+
+.preview-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .app-shell {
   background:
     radial-gradient(circle at top left, rgba(37, 99, 235, 0.08), transparent 32%),
@@ -52,6 +168,17 @@ button {
   display: grid;
   grid-template-columns: 276px minmax(0, 1fr);
   min-height: 100vh;
+}
+
+.app-shell::before {
+  background: linear-gradient(90deg, #2563eb, #0f766e, #111827);
+  content: "";
+  height: 3px;
+  left: 276px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 10;
 }
 
 .sidebar {
@@ -155,6 +282,44 @@ nav button:hover {
   font-size: 14px;
 }
 
+.user-card {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  padding: 12px;
+}
+
+.user-avatar {
+  align-items: center;
+  background: #ffffff;
+  border-radius: 8px;
+  color: #0f172a;
+  display: grid;
+  font-size: 12px;
+  font-weight: 900;
+  height: 38px;
+  justify-items: center;
+  width: 38px;
+}
+
+.user-card strong,
+.user-card span {
+  display: block;
+}
+
+.user-card strong {
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.user-card span {
+  color: #94a3b8;
+  font-size: 12px;
+}
+
 .content-area {
   overflow-x: hidden;
   padding: 32px;
@@ -222,6 +387,10 @@ nav button:hover {
 .stat:hover,
 .panel:hover {
   box-shadow: var(--shadow-md);
+}
+
+.stat:hover {
+  transform: translateY(-2px);
 }
 
 .stat-top {
@@ -882,8 +1051,21 @@ textarea:focus {
 }
 
 @media (max-width: 920px) {
+  .login-shell {
+    grid-template-columns: 1fr;
+    padding: 22px;
+  }
+
+  .login-copy h1 {
+    font-size: 34px;
+  }
+
   .app-shell {
     grid-template-columns: 1fr;
+  }
+
+  .app-shell::before {
+    left: 0;
   }
 
   .sidebar {
@@ -924,6 +1106,19 @@ textarea:focus {
 }
 
 @media (max-width: 640px) {
+  .login-shell {
+    padding: 12px;
+  }
+
+  .login-panel,
+  .login-preview {
+    padding: 18px;
+  }
+
+  .preview-grid {
+    grid-template-columns: 1fr;
+  }
+
   .content-area {
     padding: 18px;
   }
@@ -1055,6 +1250,11 @@ textarea:focus {
   min-height: 38px;
 }
 
+.theme-toggle.logout {
+  background: rgba(248, 113, 113, 0.12);
+  color: #fecaca;
+}
+
 .alert-panel {
   align-items: center;
   background: var(--surface);
@@ -1078,6 +1278,36 @@ textarea:focus {
   font-size: 16px;
   line-height: 1.45;
   margin-top: 5px;
+}
+
+.executive-alerts-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.executive-alert-card {
+  background: linear-gradient(135deg, var(--surface), var(--surface-soft));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+}
+
+.executive-alert-card strong {
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.login-preview .executive-alert-card {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.login-shell.dark .login-preview .executive-alert-card {
+  background: rgba(31, 41, 55, 0.78);
 }
 
 .trend-chart {
@@ -1222,10 +1452,73 @@ button:disabled {
   height: 2px;
 }
 
+.ai-flow-panel {
+  overflow-x: auto;
+}
+
+.ai-flow {
+  align-items: stretch;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr 24px 1fr;
+  min-width: 880px;
+}
+
+.ai-flow-step {
+  background: var(--surface-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+}
+
+.ai-flow-step span {
+  align-items: center;
+  background: var(--blue-soft);
+  border-radius: 8px;
+  color: #2563eb;
+  display: grid;
+  font-size: 12px;
+  font-weight: 900;
+  height: 34px;
+  justify-items: center;
+  width: 34px;
+}
+
+.ai-flow-step strong {
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.ai-flow i {
+  align-self: center;
+  background: var(--line-strong);
+  height: 2px;
+}
+
+.ai-flow-copy {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
 @media (max-width: 920px) {
   .architecture-grid,
-  .flow {
+  .flow,
+  .executive-alerts-grid {
     grid-template-columns: 1fr;
+  }
+
+  .ai-flow {
+    grid-template-columns: 1fr;
+    min-width: 0;
+  }
+
+  .ai-flow i {
+    height: 18px;
+    justify-self: center;
+    width: 2px;
   }
 }
 

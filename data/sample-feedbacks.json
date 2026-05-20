@@ -1,21 +1,21 @@
 [
   {
     "source": "Zendesk",
-    "customer": "Fintech Atlas Pay",
+    "customer": "Atlas Pay | Conta Enterprise",
     "channel": "Ticket Enterprise",
-    "text": "A conciliacao de pagamentos Pix esta divergente desde ontem. O financeiro encontrou valores duplicados em 42 transacoes e precisa fechar o caixa ate 18h."
+    "text": "A conciliacao de pagamentos Pix esta divergente desde ontem. O financeiro encontrou cobranca duplicada em 42 transacoes e precisa fechar o caixa ate 18h."
   },
   {
     "source": "Intercom",
-    "customer": "Clara Nogueira",
+    "customer": "Clara Nogueira | Onboarding PJ",
     "channel": "Chat in-app",
     "text": "Nao consigo concluir o onboarding da conta PJ. A etapa de validacao de documentos volta para o inicio sem mostrar qual campo esta incorreto."
   },
   {
     "source": "Webhook Monitor",
-    "customer": "Banco Aurora",
+    "customer": "Banco Aurora | API Banking",
     "channel": "API Alert",
-    "text": "A API de criacao de cobrancas esta retornando erro 500 em horario de pico. Isso bloqueia a emissao de boletos para clientes enterprise."
+    "text": "A API de criacao de cobrancas esta retornando erro 500 em horario de pico. Isso bloqueia a emissao de boletos para clientes enterprise e aciona contingencia manual."
   },
   {
     "source": "NPS",
@@ -25,9 +25,9 @@
   },
   {
     "source": "Email",
-    "customer": "Marina Lopes",
+    "customer": "Marina Lopes | Finance Ops",
     "channel": "Customer Success",
-    "text": "Tivemos cobranca duplicada no cartao corporativo e ainda nao recebemos retorno. O caso e urgente porque impacta nosso fechamento financeiro."
+    "text": "Tivemos cobranca duplicada no cartao corporativo e ainda nao recebemos retorno. O caso e urgente porque impacta fechamento financeiro e reembolso interno."
   },
   {
     "source": "App Review",
@@ -43,7 +43,7 @@
   },
   {
     "source": "Slack Connect",
-    "customer": "NovaBank APIs",
+    "customer": "NovaBank | Integracao API",
     "channel": "Canal tecnico",
     "text": "A documentacao da API de estorno nao deixa claro quais webhooks sao enviados em falhas parciais. Nosso time ficou inseguro para colocar em producao."
   },
@@ -70,5 +70,17 @@
     "customer": "Operacao Critica",
     "channel": "Incidente",
     "text": "Falha urgente na rotina de liquidacao automatica. Os pagamentos aprovados nao mudaram de status e o time de operacoes esta tratando manualmente."
+  },
+  {
+    "source": "Customer.io",
+    "customer": "BetaCard | Growth Fintech",
+    "channel": "Jornada de ativacao",
+    "text": "Usuarios aprovados no KYC nao recebem o email de ativacao do cartao virtual. O onboarding fica parado e o time de CX precisa reenviar manualmente."
+  },
+  {
+    "source": "DataDog",
+    "customer": "OpenFinance Hub",
+    "channel": "Monitoramento API",
+    "text": "O endpoint de saldo esta lento acima de 4 segundos para clientes com muitas contas conectadas. Isso afeta a experiencia no app e aumenta abandono."
   }
 ]
